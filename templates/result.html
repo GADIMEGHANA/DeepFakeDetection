@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFake Detection Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            margin-top: 30px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .result-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        .result-box {
+            display: inline-block;
+            margin: 20px;
+            padding: 15px 30px;
+            border-radius: 4px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .real {
+            background-color: #28a745;
+        }
+        .fake {
+            background-color: #dc3545;
+        }
+        .confidence {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <h1>DeepFake Detection Result</h1>
+    
+    <div class="container">
+        <h2>Analysis Complete</h2>
+        
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" class="result-img">
+        
+        <div class="result-box {% if result == 'REAL' %}real{% else %}fake{% endif %}">
+            {{ result }}
+        </div>
+        
+        <div class="confidence">
+            Confidence: {{ "%.2f"|format(confidence) }}%
+        </div>
+        
+        <a href="{{ url_for('index') }}" class="btn">Analyze Another Image</a>
+    </div>
+</body>
+</html>
